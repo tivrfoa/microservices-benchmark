@@ -1,0 +1,1 @@
+wrk --timeout 2 --latency -t2 -c50 -d10 -R100 -s wrk-pessoa.lua http://localhost:8080/personCreate
