@@ -33,5 +33,5 @@ func personCreate(w http.ResponseWriter, req *http.Request) {
 		return
 	}
 	fmt.Println("Got person: ", p)
-	w.Write([]byte(p.Name + " is " + strconv.Itoa(p.Age) + " years old."))
+	w.Write([]byte(p.Name + " is " + strconv.Itoa(p.Age) + " years old"))
 }
