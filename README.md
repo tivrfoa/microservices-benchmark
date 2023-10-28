@@ -4,6 +4,7 @@ The goal here is to have an idea on:
   - time to first request
   - memory utilization
 
+It still in early stage, but these are the results for now.
 
 ## Languages and frameworks used so far
 
