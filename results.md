@@ -130,7 +130,21 @@ Requests/sec:    999.81
 Transfer/sec:     98.61KB
 ```
 
-
+```txt
+wrk --timeout 2 -t4 -c50 -d30 -R3000 -s wrk-pessoa.lua http://localhost:8080/personCreate
+Running 30s test @ http://localhost:8080/personCreate
+  4 threads and 50 connections
+  Thread calibration: mean lat.: 57.218ms, rate sampling interval: 748ms
+  Thread calibration: mean lat.: 57.460ms, rate sampling interval: 741ms
+  Thread calibration: mean lat.: 56.708ms, rate sampling interval: 737ms
+  Thread calibration: mean lat.: 56.384ms, rate sampling interval: 767ms
+  Thread Stats   Avg      Stdev     Max   +/- Stdev
+    Latency     1.08ms  430.09us   4.39ms   63.72%
+    Req/Sec   749.99      1.02   752.00     98.08%
+  89936 requests in 30.00s, 8.66MB read
+Requests/sec:   2997.93
+Transfer/sec:    295.69KB
+```
 
 # Java Quarkus Blocking - Native with GraalVM
 
@@ -231,6 +245,22 @@ Running 10s test @ http://localhost:8080/personCreate
   10000 requests in 10.00s, 0.96MB read
 Requests/sec:    999.90
 Transfer/sec:     98.62KB
+```
+
+```txt
+wrk --timeout 2 -t4 -c50 -d30 -R3000 -s wrk-pessoa.lua http://localhost:8080/personCreate
+Running 30s test @ http://localhost:8080/personCreate
+  4 threads and 50 connections
+  Thread calibration: mean lat.: 1.212ms, rate sampling interval: 10ms
+  Thread calibration: mean lat.: 1.162ms, rate sampling interval: 10ms
+  Thread calibration: mean lat.: 1.191ms, rate sampling interval: 10ms
+  Thread calibration: mean lat.: 1.200ms, rate sampling interval: 10ms
+  Thread Stats   Avg      Stdev     Max   +/- Stdev
+    Latency     1.18ms  459.64us   8.78ms   64.18%
+    Req/Sec   790.53     87.11     1.11k    44.32%
+  89937 requests in 30.00s, 8.66MB read
+Requests/sec:   2997.93
+Transfer/sec:    295.69KB
 ```
 
 ## Compilation

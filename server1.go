@@ -13,7 +13,6 @@ type Person struct {
 }
 
 func main() {
-
     http.HandleFunc("/", hello)
     http.HandleFunc("/personCreate", personCreate)
 
@@ -21,7 +20,7 @@ func main() {
 }
 
 func hello(w http.ResponseWriter, req *http.Request) {
-	w.Write([]byte("Hello Go!"))
+	w.Write([]byte("Hello World!"))
 }
 
 func personCreate(w http.ResponseWriter, req *http.Request) {
@@ -32,6 +31,6 @@ func personCreate(w http.ResponseWriter, req *http.Request) {
 		http.Error(w, err.Error(), http.StatusBadRequest)
 		return
 	}
-	fmt.Println("Got person: ", p)
+	fmt.Println(p)
 	w.Write([]byte(p.Name + " is " + strconv.Itoa(p.Age) + " years old"))
 }
