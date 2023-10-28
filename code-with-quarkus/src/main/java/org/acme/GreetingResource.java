@@ -27,8 +27,16 @@ public class GreetingResource {
 
     @POST
     @Produces(MediaType.TEXT_PLAIN)
+	@Path("personCreate/blocking")
+    public String personCreateBlocking(Person person) {
+		System.out.println(person);
+        return person.Name + " is " + person.Age + " years old";
+    }
+
+    @POST
+    @Produces(MediaType.TEXT_PLAIN)
 	@Path("personCreate")
-	// @NonBlocking
+	@NonBlocking
     public String personCreate(Person person) {
 		System.out.println(person);
         return person.Name + " is " + person.Age + " years old";
