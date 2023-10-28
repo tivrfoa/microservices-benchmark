@@ -60,16 +60,16 @@ Transfer/sec:    135.73KB
 wrk --timeout 2 -t4 -c50 -d30 -R3000 -s wrk-pessoa.lua http://localhost:8080/personCreate
 Running 30s test @ http://localhost:8080/personCreate
   4 threads and 50 connections
-  Thread calibration: mean lat.: 1.243ms, rate sampling interval: 10ms
-  Thread calibration: mean lat.: 1.187ms, rate sampling interval: 10ms
-  Thread calibration: mean lat.: 1.286ms, rate sampling interval: 10ms
-  Thread calibration: mean lat.: 1.264ms, rate sampling interval: 10ms
+  Thread calibration: mean lat.: 1.048ms, rate sampling interval: 10ms
+  Thread calibration: mean lat.: 1.084ms, rate sampling interval: 10ms
+  Thread calibration: mean lat.: 1.014ms, rate sampling interval: 10ms
+  Thread calibration: mean lat.: 1.110ms, rate sampling interval: 10ms
   Thread Stats   Avg      Stdev     Max   +/- Stdev
-    Latency     1.28ms  512.07us  10.00ms   67.33%
-    Req/Sec   789.92    275.52     1.33k    77.36%
-  89208 requests in 30.01s, 8.59MB read
-Requests/sec:   2972.71
-Transfer/sec:    293.21KB
+    Latency     1.06ms  432.48us   2.95ms   63.69%
+    Req/Sec   791.39     80.67     1.11k    51.65%
+  89935 requests in 30.00s, 11.92MB read
+Requests/sec:   2997.91
+Transfer/sec:    406.94KB
 ```
 
 # Rust Axum
@@ -160,7 +160,40 @@ Requests/sec:    999.96
 Transfer/sec:     98.63KB
 ```
 
-## Compilation
+# Java Quarkus NonBlocking - Native with GraalVM
+
+```txt
+wrk --timeout 2 -t4 -c50 -d10 -R1000 -s wrk-pessoa.lua http://localhost:8080/personCreate
+Running 10s test @ http://localhost:8080/personCreate
+  4 threads and 50 connections
+  Thread Stats   Avg      Stdev     Max   +/- Stdev
+    Latency     1.23ms  435.23us   3.78ms   68.80%
+    Req/Sec       -nan      -nan   0.00      0.00%
+  10000 requests in 10.00s, 0.96MB read
+Requests/sec:    999.90
+Transfer/sec:     98.62KB
+```
+
+```txt
+wrk --timeout 2 -t4 -c50 -d30 -R3000 -s wrk-pessoa.lua http://localhost:8080/personCreate
+Running 30s test @ http://localhost:8080/personCreate
+  4 threads and 50 connections
+  Thread calibration: mean lat.: 1.212ms, rate sampling interval: 10ms
+  Thread calibration: mean lat.: 1.162ms, rate sampling interval: 10ms
+  Thread calibration: mean lat.: 1.191ms, rate sampling interval: 10ms
+  Thread calibration: mean lat.: 1.200ms, rate sampling interval: 10ms
+  Thread Stats   Avg      Stdev     Max   +/- Stdev
+    Latency     1.18ms  459.64us   8.78ms   64.18%
+    Req/Sec   790.53     87.11     1.11k    44.32%
+  89937 requests in 30.00s, 8.66MB read
+Requests/sec:   2997.93
+Transfer/sec:    295.69KB
+```
+
+
+# GraalVM Compilation
+
+## Blocking
 
 ```txt
 [INFO] [io.quarkus.deployment.pkg.steps.JarResultBuildStep] Building native image source jar: /home/lesco/dev/go/code-with-quarkus/target/code-with-quarkus-1.0.0-SNAPSHOT-native-image-source-jar/code-with-quarkus-1.0.0-SNAPSHOT-runner.jar
@@ -233,37 +266,7 @@ Finished generating 'code-with-quarkus-1.0.0-SNAPSHOT-runner' in 7m 53s.
 [INFO] ------------------------------------------------------------------------
 ```
 
-# Java Quarkus NonBlocking - Native with GraalVM
-
-```txt
-wrk --timeout 2 -t4 -c50 -d10 -R1000 -s wrk-pessoa.lua http://localhost:8080/personCreate
-Running 10s test @ http://localhost:8080/personCreate
-  4 threads and 50 connections
-  Thread Stats   Avg      Stdev     Max   +/- Stdev
-    Latency     1.23ms  435.23us   3.78ms   68.80%
-    Req/Sec       -nan      -nan   0.00      0.00%
-  10000 requests in 10.00s, 0.96MB read
-Requests/sec:    999.90
-Transfer/sec:     98.62KB
-```
-
-```txt
-wrk --timeout 2 -t4 -c50 -d30 -R3000 -s wrk-pessoa.lua http://localhost:8080/personCreate
-Running 30s test @ http://localhost:8080/personCreate
-  4 threads and 50 connections
-  Thread calibration: mean lat.: 1.212ms, rate sampling interval: 10ms
-  Thread calibration: mean lat.: 1.162ms, rate sampling interval: 10ms
-  Thread calibration: mean lat.: 1.191ms, rate sampling interval: 10ms
-  Thread calibration: mean lat.: 1.200ms, rate sampling interval: 10ms
-  Thread Stats   Avg      Stdev     Max   +/- Stdev
-    Latency     1.18ms  459.64us   8.78ms   64.18%
-    Req/Sec   790.53     87.11     1.11k    44.32%
-  89937 requests in 30.00s, 8.66MB read
-Requests/sec:   2997.93
-Transfer/sec:    295.69KB
-```
-
-## Compilation
+## NonBlocking
 
 ```txt
 [INFO] [io.quarkus.deployment.pkg.steps.JarResultBuildStep] Building native image source jar: /home/lesco/dev/go/code-with-quarkus/target/code-with-quarkus-1.0.0-SNAPSHOT-native-image-source-jar/code-with-quarkus-1.0.0-SNAPSHOT-runner.jar
