@@ -25,13 +25,14 @@ async fn hello() -> String {
 	"Hello World".into()
 }
 
-#[derive(Deserialize)]
+#[derive(Debug, Deserialize)]
 struct Person {
 	Name: String,
 	Age: u8,
 }
 
 async fn personCreate(Json(person): Json<Person>) -> String {
+	println!("{person:?}");
 	format!("{} is {} years old", person.Name, person.Age)
 }
 

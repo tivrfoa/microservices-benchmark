@@ -12,6 +12,22 @@ Requests/sec:    999.84
 Transfer/sec:    238.24KB
 ```
 
+```txt
+wrk --timeout 2 -t4 -c50 -d30 -R3000 -s wrk-pessoa.lua http://localhost:8080/personCreate
+Running 30s test @ http://localhost:8080/personCreate
+  4 threads and 50 connections
+  Thread calibration: mean lat.: 1484.460ms, rate sampling interval: 5197ms
+  Thread calibration: mean lat.: 1549.416ms, rate sampling interval: 5341ms
+  Thread calibration: mean lat.: 1482.671ms, rate sampling interval: 5197ms
+  Thread calibration: mean lat.: 1531.373ms, rate sampling interval: 5292ms
+  Thread Stats   Avg      Stdev     Max   +/- Stdev
+    Latency     5.47s     1.60s   13.17s    63.55%
+    Req/Sec   557.17      7.45   567.00     66.67%
+  65469 requests in 30.00s, 15.23MB read
+Requests/sec:   2182.32
+Transfer/sec:    520.01KB
+```
+
 # Deno Oak
 
 ```txt
@@ -40,6 +56,22 @@ Requests/sec:    999.88
 Transfer/sec:    135.73KB
 ```
 
+```txt
+wrk --timeout 2 -t4 -c50 -d30 -R3000 -s wrk-pessoa.lua http://localhost:8080/personCreate
+Running 30s test @ http://localhost:8080/personCreate
+  4 threads and 50 connections
+  Thread calibration: mean lat.: 1.243ms, rate sampling interval: 10ms
+  Thread calibration: mean lat.: 1.187ms, rate sampling interval: 10ms
+  Thread calibration: mean lat.: 1.286ms, rate sampling interval: 10ms
+  Thread calibration: mean lat.: 1.264ms, rate sampling interval: 10ms
+  Thread Stats   Avg      Stdev     Max   +/- Stdev
+    Latency     1.28ms  512.07us  10.00ms   67.33%
+    Req/Sec   789.92    275.52     1.33k    77.36%
+  89208 requests in 30.01s, 8.59MB read
+Requests/sec:   2972.71
+Transfer/sec:    293.21KB
+```
+
 # Rust Axum
 
 ```txt
@@ -52,6 +84,22 @@ Running 10s test @ http://localhost:8080/personCreate
   10000 requests in 10.00s, 1.33MB read
 Requests/sec:    999.87
 Transfer/sec:    135.72KB
+```
+
+```txt
+wrk --timeout 2 -t4 -c50 -d30 -R3000 -s wrk-pessoa.lua http://localhost:8080/personCreate
+Running 30s test @ http://localhost:8080/personCreate
+  4 threads and 50 connections
+  Thread calibration: mean lat.: 1.065ms, rate sampling interval: 10ms
+  Thread calibration: mean lat.: 1.070ms, rate sampling interval: 10ms
+  Thread calibration: mean lat.: 0.934ms, rate sampling interval: 10ms
+  Thread calibration: mean lat.: 1.016ms, rate sampling interval: 10ms
+  Thread Stats   Avg      Stdev     Max   +/- Stdev
+    Latency     1.03ms  430.50us   3.81ms   62.16%
+    Req/Sec   794.77     85.31     1.11k    49.68%
+  89935 requests in 30.00s, 11.92MB read
+Requests/sec:   2997.85
+Transfer/sec:    406.93KB
 ```
 
 # Java Quarkus Blocking
