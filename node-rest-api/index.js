@@ -17,8 +17,6 @@ function hello(req, res) {
 }
 
 function personCreate(req, res) {
-	// console.log(req);
-	// let p = JSON.parse(req.body);
 	let p = req.body;
 	console.log(p);
 	res.send(`${p.Name} is ${p.Age} old`);

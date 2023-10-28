@@ -12,7 +12,7 @@ router
   })
   .post("/personCreate", async (context) => {
 	  let person = await context.request.body().value as Person;
-	  console.log("Got person: ", person);
+	  console.log(person);
 	  context.response.body = `${person.Name} is ${person.Age} years old`;
   });
 

@@ -13,11 +13,7 @@ async fn main() {
         .route("/", get(hello))
         .route("/personCreate", post(personCreate));
 
-    let port = std::env::var("HTTP_PORT")
-        .unwrap_or("8080".into())
-        .parse::<u16>()
-        .unwrap();
-    let addr = SocketAddr::from(([127, 0, 0, 1], port));
+    let addr = SocketAddr::from(([127, 0, 0, 1], 8080));
     println!("Listening on {}", addr);
     axum::Server::bind(&addr)
         .serve(app.into_make_service())
@@ -35,8 +31,7 @@ struct Person {
 	Age: u8,
 }
 
-#[axum::debug_handler]
-async fn personCreate(Json(person): Json<Person>) -> Result<impl IntoResponse, StatusCode> {
-	Ok(format!("{} is {} years old", person.Name, person.Age))
+async fn personCreate(Json(person): Json<Person>) -> String {
+	format!("{} is {} years old", person.Name, person.Age)
 }
 
